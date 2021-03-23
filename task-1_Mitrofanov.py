@@ -40,7 +40,7 @@ def exists_king_way(np_x, np_y, nk_x, nk_y):
 transform_cord = lambda dict, edge, un: (dict[edge[0]], int(edge[1]) + un)
 
 a = []
-filepath = input()
+filepath = "in.txt"
 with open(filepath, "r") as file:
     for line in file.readlines():
         a.append(line.strip())
@@ -54,7 +54,7 @@ prev = {(k_x, k_y): -1}
 died_zone = get_neighbors(np_x, np_y, commands_p)
 
 answer = []
-with open("result.txt", "w") as f:
+with open("out.txt", "w") as f:
     if exists_king_way(np_x, np_y, nk_x, nk_y, ):
         last = prev[(p_x, p_y)]
         answer.append((p_x, p_y))
