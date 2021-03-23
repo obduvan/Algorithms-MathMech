@@ -71,4 +71,6 @@ if exists_king_way(np_x, np_y, nk_x, nk_y,):
             f.writelines("{0}{1}\n".format(el[0], el[1]))
 
 else:
-    print("Маршрута не существует")
+    with open("result.txt", "w") as f:
+        # print("Маршрута не существует")
+        f.write("Маршрута не существует")
