@@ -1,6 +1,5 @@
 import collections
 
-
 x_cord = {"a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5, "g": 6, "h": 7}
 rev_x_cord = {0: "a", 1: "b", 2: "c", 3: "d", 4: "e", 5: "f", 6: "g", 7: "h"}
 commands_k = [(1, 2), (-1, 2), (1, -2), (-1, -2), (2, 1), (-2, 1), (2, -1), (-2, -1)]
@@ -40,7 +39,6 @@ def exists_king_way(np_x, np_y, nk_x, nk_y):
 
 transform_cord = lambda dict, edge, un: (dict[edge[0]], int(edge[1]) + un)
 
-
 a = []
 filepath = input()
 with open(filepath, "r") as file:
@@ -56,21 +54,18 @@ prev = {(k_x, k_y): -1}
 died_zone = get_neighbors(np_x, np_y, commands_p)
 
 answer = []
-if exists_king_way(np_x, np_y, nk_x, nk_y,):
-    last = prev[(p_x, p_y)]
-    answer.append((p_x, p_y))
-    answer.append(last)
-    while last != (k_x, k_y):
-        last = prev[last]
+with open("result.txt", "w") as f:
+    if exists_king_way(np_x, np_y, nk_x, nk_y, ):
+        last = prev[(p_x, p_y)]
+        answer.append((p_x, p_y))
         answer.append(last)
-    answer.reverse()
+        while last != (k_x, k_y):
+            last = prev[last]
+            answer.append(last)
+        answer.reverse()
 
-    with open("result.txt", "w") as f:
         for el in answer:
-            # print("{0}{1}".format(el[0], el[1]))
             f.writelines("{0}{1}\n".format(el[0], el[1]))
 
-else:
-    with open("result.txt", "w") as f:
-        # print("Маршрута не существует")
-        f.write("Маршрута не существует")
+    else:
+        f.write("No answer")
