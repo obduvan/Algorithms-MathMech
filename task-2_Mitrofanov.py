@@ -22,9 +22,15 @@ def print_answer(survivors, last_vert):
     answer_list = survivors[f_ind::]
     answer_list = list(map(lambda x: x + 1, answer_list))
     with open("out.txt", "w") as f:
+        f.write("N\n")
         for el in answer_list:
             f.writelines(f"{el} ")
     exit()
+
+
+def print_no_cycle():
+    with open("out.txt", "w") as f:
+        f.writelines("A")
 
 
 def dfs(current_vertex, prev_vertex):
@@ -46,6 +52,8 @@ def main():
     visited = set()
     survivors = []
     dfs(0, -1)
+
+    print_no_cycle()
 
 
 if __name__ == '__main__':
