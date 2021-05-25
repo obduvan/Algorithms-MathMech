@@ -14,15 +14,19 @@ def get_nextNode():
 
 def get_answer(nextNode):
     while nextNode != finish:
-        for neighbor in GRAPH[nextNode]:
-            v = neighbor[0]
-            w = neighbor[1]
-            if D[v] > max(D[nextNode], w):
-                D[v] = max(D[nextNode], w)
-                PRED.update({v: nextNode})
+        try:
+            for neighbor in GRAPH[nextNode]:
+                v = neighbor[0]
+                w = neighbor[1]
+                if D[v] > max(D[nextNode], w):
+                    D[v] = max(D[nextNode], w)
+                    PRED.update({v: nextNode})
 
-        dump.append(nextNode)
-        nextNode = get_nextNode()
+            dump.append(nextNode)
+            nextNode = get_nextNode()
+        except KeyError:
+            return
+
 
 
 def read_file() -> (int, list):
