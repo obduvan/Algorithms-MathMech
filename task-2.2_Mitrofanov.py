@@ -24,10 +24,14 @@ def read_data():
         K, L = map(int, f.readline().split())
         graph_1 = {'s': [str(i) for i in range(1, K + 1)]}
         for i in range(K):
-            graph_1[str(i + 1)] = f.readline().split()
+            inplist = f.readline().split()
+            graph_1[str(i + 1)] = inplist
+            for v in inplist:
+                if v not in graph_1:
+                    graph_1[v] = []
+                graph_1[v].append(str(i+1))
 
         for i in range(L):
-            graph_1[str(i + 1 + K)] = f.readline().split()
             graph_1[str(i + 1 + K)].append('t')
     return K, graph_1
 
@@ -57,13 +61,13 @@ def is_not_nul(s, f):
 
 
 def has_st(start, end, graph_1):
-    queue = [start]
+    queue = collections.deque([start])
     parent.clear()
 
     hp = 10 ** 8
-    visited = collections.deque([start])
+    visited = [start]
     while queue:
-        vertex = queue.popleft()
+        vertex = queue.pop()
         for neighboor in graph_1[vertex]:
             res, hp_new = is_not_nul(vertex, neighboor)
             if res and neighboor not in visited:
