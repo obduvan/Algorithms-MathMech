@@ -63,7 +63,7 @@ def has_st(start, end, graph_1):
     hp = 10 ** 8
     visited = collections.deque([start])
     while queue:
-        vertex = queue.pop()
+        vertex = queue.popleft()
         for neighboor in graph_1[vertex]:
             res, hp_new = is_not_nul(vertex, neighboor)
             if res and neighboor not in visited:
