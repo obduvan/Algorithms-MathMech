@@ -23,6 +23,8 @@ def read_data():
     with open('in.txt', 'r') as f:
         K, L = map(int, f.readline().split())
         graph_1 = {'s': [str(i) for i in range(1, K + 1)]}
+        for i in graph_1['s']:
+            edge_f['s' + i] = 0
         for i in range(K):
             inplist = f.readline().split()
             graph_1[str(i + 1)] = inplist
@@ -30,33 +32,28 @@ def read_data():
                 if v not in graph_1:
                     graph_1[v] = []
                 graph_1[v].append(str(i+1))
+                edge_f[str(i+1)+v] = 0
 
         for i in range(L):
             graph_1[str(i + 1 + K)].append('t')
+            edge_f[str(i+1+K)+'t'] = 0
+
     return K, graph_1
 
 
-def is_straight(s, f):
-    return int(s) < int(f)
-
-
 def change_f(hp, s, f):
-    if s != 's' and f != 't':
-        if is_straight(s, f):
-            edge_f[s + f] += hp
-        else:
-            edge_f[s + f] -= hp
-    elif s == 's' or f == 't':
+    if s+f in edge_f:
         edge_f[s + f] += hp
+    else:
+        edge_f[f+s] -= hp
 
 
 def is_not_nul(s, f):
-    if s == 's' or f == 't' or is_straight(s, f):
+    if s+f in edge_f:
         hp = 1 - edge_f[s + f]
         return hp > 0, hp
     else:
-        hp = edge_f[s + f]
-
+        hp = edge_f[f + s]
         return hp > 0, hp
 
 
@@ -83,9 +80,6 @@ def has_st(start, end, graph_1):
 
 
 def start(graph_1):
-    for u in graph_1:
-        for v in graph_1[u]:
-            edge_f[str(u + v)] = 0
 
     while True:
         tr, hp = has_st('s', 't', graph_1)
