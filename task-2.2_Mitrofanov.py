@@ -35,6 +35,8 @@ def read_data():
                 edge_f[str(i+1)+v] = 0
 
         for i in range(L):
+            if str(i + 1 + K) not in graph_1:
+                    graph_1[str(i + 1 + K)] = []
             graph_1[str(i + 1 + K)].append('t')
             edge_f[str(i+1+K)+'t'] = 0
 
