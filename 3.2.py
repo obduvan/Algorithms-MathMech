@@ -3,8 +3,8 @@ set_doors = set()
 
 
 def get_door_price(door: int) -> int:
-    print(door)
-    print(door_price)
+    # print(door)
+    # print(door_price)
     return int(door_price[door - 1])
 
 with open('in.txt', 'r') as f:
